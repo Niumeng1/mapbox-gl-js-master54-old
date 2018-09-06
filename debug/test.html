@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #myCheck + label{
+            background-color: white;
+            border-radius: 5px;
+            border:1px solid #d3d3d3;
+            width:20px;
+            height:20px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 20px;
+
+        }
+        #myCheck:checked + label{
+            background-color: #eee;
+        }
+        #myCheck:checked + label:after{
+            content:"\2714";
+        }
+    </style>
+</head>
+<body>
+<input type="checkbox" id="myCheck" style="display: none;" >
+<label for="myCheck"></label>
+<script>
+    /* var req = new XMLHttpRequest();
+     req.open('GET', "http://localhost:6456/mapbox-gl-js-master/debug/abc.json");
+     req.responseType = "arraybuffer";
+     req.send();
+
+     req.onreadystatechange = function () {
+         if (req.readyState === 4) {
+             var buffer = req.response;
+             var dataview = new DataView(buffer);
+             var ints = new Uint8Array(buffer.byteLength);
+             for (var i = 0; i < ints.length; i++) {
+                 ints[i] = dataview.getUint8(i);
+             }
+             console.log(ints);
+             alert(ints[10]);
+         }
+     }*/
+
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vector JS debug page</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../dist/dmap4.0.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, #originalMap, #newMap {
+            height: 100%;
+        }
+
+        #originalMap {
+            width: 100%;
+        }
+
+        #info {
+            display: block;
+            position: relative;
+            margin: 0px auto;
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+            color: #222;
+            background: #fff;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div id='originalMap' style=""></div>
+<pre id='info'></pre>
+<!--<div id='checkboxes'>
+    <label><input id='show-overdraw-checkbox' type='checkbox'> overdraw debug</label><br />
+</div>-->
+
+
+<script src="../dist/dmap4.0.js"></script>
+
+<!--<script src='../debug/access_token_generated.js'></script>-->
+<script>
+
+    var originalMap = window.originalMap = new dmap1.Map({
+        container: 'originalMap',
+        zoom:8  ,
+        maxZoom:15,
+        style:'http://localhost:8888/zhengwu20180829/p12/resources/styles/root.json',
+        //localIdeographFontFamily: '"DIN Offc Pro Bold,Arial Unicode MS Bold", "DIN Offc Pro Medium,Arial Unicode MS Regular", "DIN Offc Pro Regular,Arial Unicode MS Regular"',
+        hash: true,
+        cluster:false,
+        center: [502945.7341003418, 306151.6109161377]
+    });
+
+    var nav = new dmap1.NavigationControl();
+    originalMap.addControl(nav, 'top-left');
+    changeLayers(originalMap);
+    function changeLayers(map) {
+        map.on("load", function() {
+            map.addSource("national-park", {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [ {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [512945.7341003418, 306151.6109161377]
+                        }
+                    }, {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [522745.7341003418, 306151.6109161377]
+                        }
+                    }, {
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [502845.7341003418, 306251.6109161377]
+                        }
+                    }]
+                }
+            });
+
+
+
+            map.addLayer({
+                "id": "park-volcanoes",
+                "type": "circle",
+                "source": "national-park",
+                "paint": {
+                    "circle-radius-pixel":1000,
+               //     "circle-radius1" :1000,
+                    "circle-color": "#B42222",
+                    "circle-pitch-alignment":'map'
+                }
+
+            });
+        });
+
+    }
+
+
+
+</script>
+</body>
+</html>

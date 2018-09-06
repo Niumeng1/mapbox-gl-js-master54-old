@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vector JS debug page</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../dist/dmap4.0.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, #originalMap, #newMap {
+            height: 100%;
+        }
+
+        #originalMap {
+            width: 100%;
+        }
+
+        #info {
+            display: block;
+            position: relative;
+            margin: 0px auto;
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+            color: #222;
+            background: #fff;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div id='originalMap' style=""></div>
+<pre id='info'></pre>
+<!--<div id='checkboxes'>
+    <label><input id='show-overdraw-checkbox' type='checkbox'> overdraw debug</label><br />
+</div>-->
+
+
+<script src="../dist/dmap4.0.js"></script>
+
+<!--<script src='../debug/access_token_generated.js'></script>-->
+<script>
+    //dmap1.accessToken = 'pk.eyJ1Ijoic25vd2ZsYWtlMTEiLCJhIjoiY2plZHY1MzIyMDRkZjJ4cXVkenc0N2llcCJ9.YRhx7NDp9QAMNfOkdf3nFA';
+    /*function localizeLayers(map) {
+        map.on('load', function() {
+            var style = map.getStyle();
+            for (var layerID in style.layers) {
+                var layer = style.layers[layerID];
+                if (layer.layout && layer.layout['text-field'] === "{name_en}") {
+                    layer.layout['text-field'] = "{name_zh}";
+                }
+            }
+            map.setStyle(style, map.style.localIdeographFontFamily);
+        });
+    }*/
+    //var a = new dmap1.Go3D({});
+    var originalMap = window.originalMap = new dmap1.Map({
+        container: 'originalMap',
+        zoom:8  ,
+
+      style:'http://localhost:8888/zhengwu20180829/p12/resources/styles/root.json',
+        //localIdeographFontFamily: '"DIN Offc Pro Bold,Arial Unicode MS Bold", "DIN Offc Pro Medium,Arial Unicode MS Regular", "DIN Offc Pro Regular,Arial Unicode MS Regular"',
+        hash: true,
+        cluster:false,
+        center: [502945.7341003418, 306151.6109161377]
+    });
+
+    var nav = new dmap1.NavigationControl();
+    originalMap.addControl(nav, 'top-left');
+    /*var scale = new dmap1.ScaleControl({
+        maxWidth: 80,
+        unit: 'imperial'
+    });
+    originalMap.addControl(scale);*/
+    /*    var popup = new dmap1.Popup({closeOnClick: false})
+            .setLngLat([546154.394952,368734.170496])
+            .setHTML('<h1>Hello World!</h1>')
+            .addTo(originalMap);*/
+    // Add zoom and rotation controls to the map.
+    //s originalMap.addControl(new dmap1.NavigationControl());
+    //localizeLayers(originalMap);
+ //   changeLayers(originalMap);
+
+    function changeLayers(map) {
+        map.on('load', function () {
+            // map.setCenter([506.56953430176, 306193.8647766113])
+//            map.addLayer(
+//                {
+//                    "id": "routeas",
+//                    "type": "fill",
+//                    "source": {
+//                        "type": "geojson",
+//                        "data": {
+//                            "type": "Feature",
+//                            "properties": {},
+//                            "geometry": {
+//                                "type": "Polygon",
+//                                "coordinates": [
+////                                    [502945.7341003418, 306151.6109161377],
+////                                    [503836.56953430176, 306191.8647766113],
+////                                    [503836.56953430176, 306193.8647766113]
+////                                  [ 502945.7341003418,306151.6109161377 ] ,
+////                                    [503836.56953430176,306191.8647766113 ],
+////                                    [503880.32373046875,305080.5081939697 ],
+////                                    [502985.98796081543,305045.50483703613],
+////                                    [ 502945.7341003418,306151.6109161377 ]
+//                                    [501631.14782224595,315803.92674073577],
+//                                    [503075.52596674114,313622.79800786823],
+//                                    [509236.1176416278,314978.6875634864]
+//                                    /*     [0,0],
+//                                         [1,5]*/
+//
+////                           [119,38],
+////                                [119,40]
+//                                    /*  [262221.20415735076,254120.1335079025],
+//                                         [262232.20415735076,254120.1335079025],
+//                                             [262221.20415735076,254122.1335079025]*/
+//                                    /*  [116.1,39.2],
+//                                         [116.3,40.2]*/
+////                                      [0.0112,5.1],
+////                                       [0.112,5.5665]
+//
+//                                    /* [  (9502136.49754042178 + 502945.7341003418) * 512*512/ (2 * 10002136.4975404218), (10002136.4975404218 - 306151.6109161377) * 512*512/ (2 * 10002136.4975404218)],
+//                                           [(9502136.49754042178 +  503836.56953430176) *512*512 / (2 * 10002136.4975404218), (10002136.4975404218 - 306191.8647766113) * 512*512 / (2 * 10002136.4975404218) ],
+//                                               [(9502136.49754042178 +  503836.56953430176) * 512*512 / (2 * 10002136.4975404218),(10002136.4975404218 - 306193.8647766113) * 512*512 / (2 * 10002136.4975404218)  ]
+//                                     */]
+//                            }
+//                        }
+//                    },
+//                    "layout": {
+//                        "line-join": "round",
+//                        "line-cap": "round"
+//                    },
+//                    "paint": {
+//                        "line-color": "#ff1639",
+//                        "line-width":2
+//                    }
+//                });
+//        });
+
+            map.addLayer({
+                'id': 'maine',
+                'type': 'fill',
+                'source': {
+                    'type': 'geojson',
+                    'data': {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Polygon',
+                            'coordinates': [[[    [501631.14782224595,315803.92674073577],
+                                [503075.52596674114,313622.79800786823],
+                                [509236.1176416278,314978.6875634864]],[0,0]]]
+                        }
+                    }
+                },
+                'layout': {},
+                'paint': {
+                    'fill-color': '#088',
+                    'fill-opacity': 0.8
+                }
+            });
+            map.on('mousemove', function (e) {
+                document.getElementById('info').innerHTML =
+                    // e.point is the x, y coordinates of the mousemove event relative
+                    // to the top-left corner of the map
+                    JSON.stringify(e.point) + '<br />' +
+                    // e.lngLat is the longitude, latitude geographical position of the event
+                    JSON.stringify(e.lngLat);
+            });
+        })
+    }
+    //var newMap = window.newMap = new mapboxgl.Map({
+    //    container: 'newMap',
+    //    zoom: 8.8,
+    //    center: [121.574, 31.1489],
+    //    style: 'mapbox://styles/mapbox/streets-v10',
+    //    localIdeographFontFamily: '"Noto Sans", "Noto Sans CJK SC", sans-serif',
+    //    hash: true
+    //});
+    //
+    //localizeLayers(newMap);
+
+    //document.getElementById('show-overdraw-checkbox').onclick = function() {
+    //    originalMap.showOverdrawInspector = !!this.checked;
+    //  originalMap.showTileBoundaries= !!this.checked;
+    //    newMap.showOverdrawInspector = !!this.checked;
+    //};
+
+
+</script>
+</body>
+</html>

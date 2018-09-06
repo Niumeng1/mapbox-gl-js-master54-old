@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapbox GL JS debug page</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../dist/dmap4.0.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div id='map'></div>
+
+<script src="../dist/dmap4.0.js"></script>
+
+<script>
+
+    var map = window.map = new dmap1.Map({
+        container: 'map',
+        zoom: 8,
+        maxZoom: 15,
+        style: 'http://localhost:8888/zhengwu20180829/p12/resources/styles/root.json',
+        //localIdeographFontFamily: '"DIN Offc Pro Bold,Arial Unicode MS Bold", "DIN Offc Pro Medium,Arial Unicode MS Regular", "DIN Offc Pro Regular,Arial Unicode MS Regular"',
+        hash: true,
+        cluster: false,
+        center: [502945.7341003418, 306151.6109161377]
+    });
+
+    map.addControl(new dmap1.NavigationControl());
+
+    map.on('load', function () {
+        map.addSource('wms-test', {
+            "type": "raster",
+        //"tiles": ['http://geodata.state.nj.us/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&width=256&height=256&layers=Natural2015'  ]
+        "tiles":['http://172.24.254.94/service/GovEMap/wms?SERVICE=WMS&REQUEST=getmap&VERSION=1.1.1&LAYERS=L9999987&STYLES=&FORMAT=image%2Fpng&TRANSPARENT=false&CRS=&HEIGHT=512&WIDTH=512&SERVICENAME=IMAGESTAT&BBOX={bbox-epsg-3857}&user=testV4&password=testV4123'],
+            "tileSize": 256
+    })
+        ;
+
+        map.addLayer({
+            "id": "wms-test-layer",
+            "type": "raster",
+            "source": "wms-test",
+            "paint": {
+                "raster-opacity": 1,
+
+
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

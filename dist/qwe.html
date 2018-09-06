@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script type="text/javascript" src="jquery-2.1.4.min.js" ></script>
+    <script type="text/javascript">
+        function fun(){
+            fun_1=function(){
+                console.log("1");
+                var ac = new Person(12);
+                return ac;
+            }
+            fun_2=function(){
+                console.log("2");
+            }
+            Person= function(age){
+                console.info(age)
+            };
+            return {
+                fun_10:fun_1,
+                fun_20:fun_2
+            }
+        }
+        var aa=fun();
+       var a= aa.fun_10();
+       alert(a.prototype);
+        aa.fun_20();
+    </script>
+</head>
+<body>
+<div>
+
+</div>
+</body>
+</html>
